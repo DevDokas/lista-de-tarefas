@@ -15,7 +15,7 @@ export const Display = styled.section`
     height: 844px;
     width: 390px;
     border: 0;
-    border-radius: 1vh;
+    border-radius: 3vh;
     background-color: grey;
 `;
 
@@ -23,7 +23,7 @@ export const Header = styled.header`
     height: 100px;
     background-color: green;
     border: 0;
-    border-radius: 1vh 1vh 0 0;
+    border-radius: 3vh 3vh 0 0;
 `;
 
 export const Title = styled.h1`
@@ -45,4 +45,5 @@ export const AddButton = styled.button`
     border-radius: 50%;
     padding: 18px;
     background-color: green;
+    cursor: pointer;
 `;

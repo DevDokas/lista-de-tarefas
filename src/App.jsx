@@ -1,10 +1,24 @@
 import React, { useState } from 'react'
-import {FaPlus} from 'react-icons/fa'
+import {FaPlus, FaRegTimesCircle} from 'react-icons/fa'
 
 // Components
-import {Container, Display, Header, Title, Body, AddButton} from './styles/stylesGlobal'
+import {
+  Container, 
+  Display, 
+  Header, 
+  Title, 
+  Body, 
+  AddButton,
+} from './styles/stylesGlobal'
 import {
   Modal,
+  Form,
+  ButtonContainer,
+  CloseButton,
+  SubmitButton,
+  InputContainer,
+  Input,
+  Paragraph,
 } from './styles/stylesModal'
 
 function App() {
@@ -14,7 +28,10 @@ function App() {
   const [list, setList] = useState([])
 
   const ShowElement = () => setShowElement(true);
-  const HideElement = () => setShowElement(false);
+  const HideElement = () => {
+    setShowElement(false)
+    setShowAlert(false)
+  };
 
   function handleChangeInput(e) {
     const inputTask = e.target.value
@@ -47,12 +64,16 @@ function App() {
           
           {showElement ? 
                     <Modal>
-                      <form onSubmit={handleItemToList}>
-                        <button onClick={HideElement}> - </button>
-                        <input type="text" placeholder="Digite a sua tarefa..." onChange={handleChangeInput} value={task}/>
-                        {showAlert ? <p>Digite a tarefa antes de adiciona-la</p> : null}
-                        <button type="submit"> Enviar </button>
-                      </form>
+                      <Form onSubmit={handleItemToList}>
+                        <CloseButton onClick={HideElement}> <FaRegTimesCircle size={33}/> </CloseButton>
+                        <InputContainer>
+                          <Input type="text" placeholder="Digite a sua tarefa..." onChange={handleChangeInput} value={task}/>
+                          {showAlert ? <Paragraph>Digite a tarefa antes de adiciona-la</Paragraph> : null}
+                        </InputContainer>
+                        <ButtonContainer>
+                          <SubmitButton type="submit"> Enviar </SubmitButton>
+                        </ButtonContainer>
+                      </Form>
                   </Modal>
           : null}
 
