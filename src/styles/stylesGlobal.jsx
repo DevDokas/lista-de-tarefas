@@ -52,6 +52,17 @@ export const ListContainer = styled.ul`
     list-style: none;
 `;
 
-export const ItemList = styled.li`
-    
+export const ItemList = styled.div`
+    display: flex;
+    justify-content: space-around;
+    height: auto;
+    width: 320px;
+    border-bottom: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.15);
 `;
+
+export const ItemInput = styled.input``;
+
+export const ItemLi= styled.li``;
+
+export const ItemButtonContainer = styled.div``;

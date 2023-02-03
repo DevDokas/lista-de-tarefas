@@ -10,7 +10,10 @@ import {
   Body, 
   AddButton,
   ListContainer,
-  ItemList
+  ItemButtonContainer,
+  ItemList,
+  ItemInput,
+  ItemLi,
 } from './styles/stylesGlobal'
 import {
   Modal,
@@ -24,13 +27,17 @@ import {
 } from './styles/stylesModal'
 
 function App() {
-  
+  const LocalStore = () => {
+    const StoredLocal = localStorage.getItem("List");
+    const RenderValue = JSON.parse(StoredLocal);
+    return RenderValue || [];
+  }
 
   const [showAlert, setShowAlert] = useState(false)
   const [showElement, setShowElement] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(true)
   const [task, setTask] = useState("")
-  const [list, setList] = useState([])
+  const [list, setList] = useState(LocalStore)
   const [itemKey, setItemKey] = useState(0)
 
   const ShowElement = () => setShowElement(true);
@@ -38,7 +45,6 @@ function App() {
     setShowElement(false)
     setShowAlert(false)
   };
-
 
   useEffect(() => {localStorage.setItem("List", JSON.stringify(list))}, [list])
 
@@ -56,18 +62,6 @@ function App() {
     if (task !== "") {
       setList([...list, {id: list.length + 1, text: task.trim()}])
     }
-    /* function KeyGen() {
-      setItemKey(itemKey + 1)
-      return itemKey
-    }
-
-    KeyGen() */
-
-    /* setList([...list, task])
-    const storageList = Object.assign({}, [...list])
-    const saveInLocal = () => )
-    saveInLocal()
-    console.log(storageList) */
 
     
     setTask("")
@@ -102,12 +96,14 @@ function App() {
 
           <ListContainer>
             {list.map((task) => (
-            <div>
-              <input type="checkbox" />
-              <ItemList key={task.id}>{task.id}{" "}{task.text}</ItemList>
-              <FaEdit />
-              {confirmDelete ? <FaTrashAlt onClick={() => setConfirmDelete(false)}/> : <FaExclamation/>}
-            </div>
+            <ItemList key={task.id}>
+              <ItemInput type="checkbox" />
+              <ItemLi >{task.id}{" "}{task.text}</ItemLi>
+              <ItemButtonContainer>
+                <FaEdit />
+                {confirmDelete ? <FaTrashAlt onClick={() => setConfirmDelete(false)}/> : <FaExclamation/>}
+              </ItemButtonContainer>
+            </ItemList>
             ))}
           </ListContainer>
         </Body>
@@ -117,3 +113,16 @@ function App() {
 }
 
 export default App
+
+    /* function KeyGen() {
+      setItemKey(itemKey + 1)
+      return itemKey
+    }
+
+    KeyGen() */
+
+    /* setList([...list, task])
+    const storageList = Object.assign({}, [...list])
+    const saveInLocal = () => )
+    saveInLocal()
+    console.log(storageList) */
