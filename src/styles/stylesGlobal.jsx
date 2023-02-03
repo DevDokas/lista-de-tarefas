@@ -47,3 +47,11 @@ export const AddButton = styled.button`
     background-color: green;
     cursor: pointer;
 `;
+
+export const ListContainer = styled.ul`
+    list-style: none;
+`;
+
+export const ItemList = styled.li`
+    
+`;

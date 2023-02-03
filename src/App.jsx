@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import {FaPlus, FaRegTimesCircle} from 'react-icons/fa'
+import React, { useState, useEffect } from 'react'
+import {FaPlus, FaRegTimesCircle, FaEdit, FaTrashAlt, FaExclamation} from 'react-icons/fa'
 
 // Components
 import {
@@ -9,6 +9,8 @@ import {
   Title, 
   Body, 
   AddButton,
+  ListContainer,
+  ItemList
 } from './styles/stylesGlobal'
 import {
   Modal,
@@ -22,16 +24,23 @@ import {
 } from './styles/stylesModal'
 
 function App() {
+  
+
   const [showAlert, setShowAlert] = useState(false)
   const [showElement, setShowElement] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(true)
   const [task, setTask] = useState("")
   const [list, setList] = useState([])
+  const [itemKey, setItemKey] = useState(0)
 
   const ShowElement = () => setShowElement(true);
   const HideElement = () => {
     setShowElement(false)
     setShowAlert(false)
   };
+
+
+  useEffect(() => {localStorage.setItem("List", JSON.stringify(list))}, [list])
 
   function handleChangeInput(e) {
     const inputTask = e.target.value
@@ -44,14 +53,28 @@ function App() {
     if (!task) {
       return setShowAlert(true);
     }
+    if (task !== "") {
+      setList([...list, {id: list.length + 1, text: task.trim()}])
+    }
+    /* function KeyGen() {
+      setItemKey(itemKey + 1)
+      return itemKey
+    }
 
-    setList([...list, task])
+    KeyGen() */
 
+    /* setList([...list, task])
+    const storageList = Object.assign({}, [...list])
+    const saveInLocal = () => )
+    saveInLocal()
+    console.log(storageList) */
+
+    
     setTask("")
     setShowAlert(false)
     HideElement()
   }
-  
+
   return (
     <Container>
       <Display>
@@ -77,9 +100,16 @@ function App() {
                   </Modal>
           : null}
 
-          <ul>
-            {list.map((item, index) => (<li key={index}>{item}</li>))}
-          </ul>
+          <ListContainer>
+            {list.map((task) => (
+            <div>
+              <input type="checkbox" />
+              <ItemList key={task.id}>{task.id}{" "}{task.text}</ItemList>
+              <FaEdit />
+              {confirmDelete ? <FaTrashAlt onClick={() => setConfirmDelete(false)}/> : <FaExclamation/>}
+            </div>
+            ))}
+          </ListContainer>
         </Body>
       </Display>
     </Container>
