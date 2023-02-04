@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import {FaPlus, FaRegTimesCircle, FaEdit, FaTrashAlt, FaExclamation} from 'react-icons/fa'
+import {FaPlus, FaRegTimesCircle, FaTrashAlt, FaExclamation, FaRegCheckSquare, FaRegSquare} from 'react-icons/fa'
 
 // Components
 import {
-  Container, 
+  Container,
+  CheckboxContainer,
+  TitleContainer, 
   Display, 
   Header, 
   Title, 
   Body, 
   AddButton,
   ListContainer,
-  ItemButtonContainer,
   ItemList,
   ItemInput,
   ItemLi,
@@ -37,8 +38,11 @@ function App() {
   const [showElement, setShowElement] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(true)
   const [task, setTask] = useState("")
+  const [obsTask, setObsTask] = useState("")
+  const [dateTask, setDateTask] = useState("")
+  const [timeTask, setTimeTask] = useState("")
   const [list, setList] = useState(LocalStore)
-  const [itemKey, setItemKey] = useState(0)
+  const [checked, setChecked] = useState(false)
 
   const ShowElement = () => setShowElement(true);
   const HideElement = () => {
@@ -48,9 +52,14 @@ function App() {
 
   useEffect(() => {localStorage.setItem("List", JSON.stringify(list))}, [list])
 
-  function handleChangeInput(e) {
+  function handleChangeInputTask(e) {
     const inputTask = e.target.value
     setTask(inputTask)
+  }
+
+  function handleChangeInputObsTask(e) {
+    const inputObsTask = e.target.value
+    setObsTask(inputObsTask)
   }
 
   function handleItemToList(e) {
@@ -60,15 +69,23 @@ function App() {
       return setShowAlert(true);
     }
     if (task !== "") {
-      setList([...list, {id: list.length + 1, text: task.trim()}])
+      setList([...list, {id: list.length + 1, title: task.trim(), details: obsTask.trim(), done: false}])
     }
 
-    
     setTask("")
     setShowAlert(false)
     HideElement()
   }
 
+  function CheckBox(task) {
+    const thisTask = task.id - 1
+    list[thisTask].done = !task.done
+    setList(list)
+    localStorage.setItem("List", JSON.stringify(list))  
+    location.reload()
+  }
+
+  
   return (
     <Container>
       <Display>
@@ -76,15 +93,18 @@ function App() {
           <Title>Tarefas</Title>
         </Header>
         <Body>
-          
           <AddButton onClick={ShowElement}> <FaPlus size={30}/> </AddButton>
-          
+          {confirmDelete ? <FaTrashAlt size={50} onClick={() => setConfirmDelete(false)}/> : <FaExclamation size={50} onClick={() => {
+            localStorage.clear()
+            location.reload()
+          }}/>}
           {showElement ? 
                     <Modal>
                       <Form onSubmit={handleItemToList}>
                         <CloseButton onClick={HideElement}> <FaRegTimesCircle size={33}/> </CloseButton>
                         <InputContainer>
-                          <Input type="text" placeholder="Digite a sua tarefa..." onChange={handleChangeInput} value={task}/>
+                          <Input type="text" placeholder="Digite a sua tarefa..." onChange={handleChangeInputTask} value={task}/>
+                          <input type="text" placeholder="Digite a descrição da tarefa... (Opcional)" onChange={handleChangeInputObsTask} value={obsTask}/>
                           {showAlert ? <Paragraph>Digite a tarefa antes de adiciona-la</Paragraph> : null}
                         </InputContainer>
                         <ButtonContainer>
@@ -97,12 +117,13 @@ function App() {
           <ListContainer>
             {list.map((task) => (
             <ItemList key={task.id}>
-              <ItemInput type="checkbox" />
-              <ItemLi >{task.id}{" "}{task.text}</ItemLi>
-              <ItemButtonContainer>
-                <FaEdit />
-                {confirmDelete ? <FaTrashAlt onClick={() => setConfirmDelete(false)}/> : <FaExclamation/>}
-              </ItemButtonContainer>
+              <ItemLi>
+                <CheckboxContainer>
+                  {task.done ? <FaRegCheckSquare size={20}  onClick={() => CheckBox(task)}/> : <FaRegSquare size={20}  onClick={() => CheckBox(task)}/>}
+                </CheckboxContainer>
+                {" "}
+                <TitleContainer>{task.title}</TitleContainer>
+              </ItemLi>
             </ItemList>
             ))}
           </ListContainer>
@@ -113,16 +134,3 @@ function App() {
 }
 
 export default App
-
-    /* function KeyGen() {
-      setItemKey(itemKey + 1)
-      return itemKey
-    }
-
-    KeyGen() */
-
-    /* setList([...list, task])
-    const storageList = Object.assign({}, [...list])
-    const saveInLocal = () => )
-    saveInLocal()
-    console.log(storageList) */

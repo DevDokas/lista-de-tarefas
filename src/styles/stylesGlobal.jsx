@@ -53,8 +53,6 @@ export const ListContainer = styled.ul`
 `;
 
 export const ItemList = styled.div`
-    display: flex;
-    justify-content: space-around;
     height: auto;
     width: 320px;
     border-bottom: 1px solid white;
@@ -63,6 +61,12 @@ export const ItemList = styled.div`
 
 export const ItemInput = styled.input``;
 
-export const ItemLi= styled.li``;
+export const ItemLi= styled.li`
+    display: flex;
+    justify-content: space-around;
 
-export const ItemButtonContainer = styled.div``;
+`;
+
+export const CheckboxContainer = styled.span``; 
+
+export const TitleContainer = styled.span``;
