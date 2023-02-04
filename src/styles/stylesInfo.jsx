@@ -26,20 +26,61 @@ export const InfoCloseButton = styled.div`
     height: 32px;
     width: fit-content;
     cursor: pointer;
-    margin-top: -15%;
+    margin-top: -3%;
     margin-left: 87%;
 `;
 
 export const TitleSpan = styled.span`
+    height: 30px;
+    width: 280px;
+    font-size: 18px;
+    text-align: center;
+    padding: 0 5px 0 5px;
+    border: 0;
+    border-radius: 10px;
     background-color: #424242;
-    width: 320px;
+    font-family: 'Roboto', sans-serif;
     margin-left: 50%;
     transform: translate(-50%, 0);
 `;
 
 export const DetailsSpan = styled.span`
+    height: 250px;
+    width: 280px;
+    font-size: 18px;
+    text-align: center;
+    resize: none;
+    padding: 0 5px 0 5px;
+    border: 0;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
     background-color: #424242;
-    width: 320px;
     margin-left: 50%;
     transform: translate(-50%, 0);
+
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #424242;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    max-height: 15px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #424242;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    max-height: 15px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #424242;
+}
 `;

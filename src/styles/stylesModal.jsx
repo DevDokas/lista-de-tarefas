@@ -50,6 +50,7 @@ export const Input = styled.input`
     text-align: center;
     padding: 0 5px 0 5px;
     border: 0;
+    border-radius: 10px;
     background-color: #424242;
     font-family: 'Roboto', sans-serif;
 `;
@@ -62,6 +63,7 @@ export const InputDetails = styled.textarea`
     resize: none;
     padding: 0 5px 0 5px;
     border: 0;
+    border-radius: 10px;
     font-family: 'Roboto', sans-serif;
     overflow-y: scroll;
     background-color: #424242;
