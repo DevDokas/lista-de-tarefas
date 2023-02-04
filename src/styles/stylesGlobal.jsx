@@ -18,6 +18,7 @@ export const Display = styled.section`
     border: 0;
     border-radius: 3vh;
     background-color: grey;
+    overflow: hidden;
 `;
 
 export const Header = styled.header`
@@ -28,12 +29,16 @@ export const Header = styled.header`
 `;
 
 export const Title = styled.h1`
-    margin-top: 60px;
-    font-size: 36px;
+    margin-top: 55px;
+    font-size: 45px;
+    font-weight: 700;
+    font-family: 'Dancing Script', cursive;
 `;
 
 export const Body = styled.section`
-
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 35px;
 `;
 
 export const SpanShowMore = styled.span`
@@ -62,6 +67,9 @@ export const ButtonShowMore = styled.button`
     position: absolute;
     top: 85%;
     left: 70%;
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
 `;
 
 export const ButtonShowLess = styled.button`
@@ -72,6 +80,9 @@ export const ButtonShowLess = styled.button`
     padding: 18px;
     background-color: green;
     cursor: pointer;
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
 `;
 
 export const AddButton = styled.button`
@@ -97,11 +108,17 @@ export const TrashButton = styled.button`
 `;
 
 export const ListContainer = styled.ul`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     list-style: none;
+    margin-top: 50px;
+    margin-left: -5px;
+    width: 390px;
 `;
 
 export const ItemList = styled.div`
-    height: auto;
+    height: 50px;
     width: 320px;
     border-bottom: 1px solid white;
     background-color: rgba(0, 0, 0, 0.15);
@@ -113,19 +130,21 @@ export const ItemLi= styled.li`
     display: flex;
     justify-content: space-around;
     height: 30px;
-
+    font-family: 'Roboto', sans-serif;
 `;
 
 export const CheckboxContainer = styled.span`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 30px;
+    height: 50px;
 `; 
 
 export const TitleContainer = styled.span`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 30px;
+    height: 50px;
+    width: 275px;
+    font-size: 20px;
 `;

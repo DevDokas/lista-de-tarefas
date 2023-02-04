@@ -25,10 +25,12 @@ import {
   Modal,
   Form,
   ButtonContainer,
+  AlertContainer,
   CloseButton,
   SubmitButton,
   InputContainer,
   Input,
+  InputDetails,
   Paragraph,
 } from './styles/stylesModal'
 
@@ -54,6 +56,8 @@ function App() {
   const HideElement = () => {
     setShowElement(false)
     setShowAlert(false)
+    setTask("")
+    setObsTask("")
   };
 
   const ShowMore = () => setShowMore(true)
@@ -85,6 +89,7 @@ function App() {
     }
 
     setTask("")
+    setObsTask("")
     setShowAlert(false)
     HideElement()
   }
@@ -116,7 +121,7 @@ function App() {
               </TrashButton> 
               :
               <TrashButton>
-                <FaExclamation size={50} onClick={() => {
+                <FaExclamation size={50} color="#970707" onClick={() => {
                 localStorage.clear()
                 location.reload()
                 }}/>
@@ -129,11 +134,13 @@ function App() {
           {showElement ? 
                     <Modal>
                       <Form onSubmit={handleItemToList}>
-                        <CloseButton onClick={HideElement}> <FaRegTimesCircle size={33}/> </CloseButton>
+                        <CloseButton > <FaRegTimesCircle size={35} onClick={HideElement} color="red"/> </CloseButton>
                         <InputContainer>
                           <Input type="text" placeholder="Digite a sua tarefa..." onChange={handleChangeInputTask} value={task}/>
-                          <input type="text" placeholder="Digite a descrição da tarefa... (Opcional)" onChange={handleChangeInputObsTask} value={obsTask}/>
-                          {showAlert ? <Paragraph>Digite a tarefa antes de adiciona-la</Paragraph> : null}
+                          <AlertContainer>
+                            {showAlert ? <Paragraph>Digite a tarefa antes de adiciona-la</Paragraph> : null}
+                          </AlertContainer>
+                          <InputDetails type="text" placeholder="Digite a descrição da tarefa... (Opcional)" onChange={handleChangeInputObsTask} value={obsTask}/>
                         </InputContainer>
                         <ButtonContainer>
                           <SubmitButton type="submit"> Enviar </SubmitButton>

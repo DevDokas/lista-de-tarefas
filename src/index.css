@@ -22,3 +22,33 @@ body {
   align-items: center;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: gray;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  max-height: 15px;
+  border: 0;
+  border-radius: 15px;
+  background: rgb(109, 109, 109);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  max-height: 15px;
+  border: 0;
+  border-radius: 15px;
+  background: #555;
+}
+
+textarea:focus, input:focus, select:focus {
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
