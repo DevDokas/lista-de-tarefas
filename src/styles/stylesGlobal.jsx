@@ -9,6 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Display = styled.section`
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-top: 20px;
@@ -35,15 +36,62 @@ export const Body = styled.section`
 
 `;
 
-export const AddButton = styled.button`
+export const SpanShowMore = styled.span`
+
+`;
+
+export const ContainerShowMore = styled.div`
     position: absolute;
-    bottom: 15%;
-    right: 42%;
+    top: 61.9%;
+    left: 70%;
+    height: 270px;
+    width: 90px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+`;
+
+export const ButtonShowMore = styled.button`
     height: 75px;
     width: 75px;
     border: 0;
     border-radius: 50%;
     padding: 18px;
+    background-color: green;
+    cursor: pointer;
+    position: absolute;
+    top: 85%;
+    left: 70%;
+`;
+
+export const ButtonShowLess = styled.button`
+    height: 75px;
+    width: 75px;
+    border: 0;
+    border-radius: 50%;
+    padding: 18px;
+    background-color: green;
+    cursor: pointer;
+`;
+
+export const AddButton = styled.button`
+    height: 75px;
+    width: 75px;
+    border: 0;
+    border-radius: 50%;
+    padding: 18px;
+    background-color: green;
+    cursor: pointer;
+`;
+
+export const TrashButton = styled.button`
+    display: flex;
+    justify-content: center;
+    height: 75px;
+    width: 75px;
+    border: 0;
+    border-radius: 50%;
+    padding: 12px 0 5px 0;
     background-color: green;
     cursor: pointer;
 `;
@@ -64,9 +112,20 @@ export const ItemInput = styled.input``;
 export const ItemLi= styled.li`
     display: flex;
     justify-content: space-around;
+    height: 30px;
 
 `;
 
-export const CheckboxContainer = styled.span``; 
+export const CheckboxContainer = styled.span`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 30px;
+`; 
 
-export const TitleContainer = styled.span``;
+export const TitleContainer = styled.span`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 30px;
+`;

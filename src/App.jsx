@@ -5,12 +5,17 @@ import {FaPlus, FaRegTimesCircle, FaTrashAlt, FaExclamation, FaRegCheckSquare, F
 import {
   Container,
   CheckboxContainer,
-  TitleContainer, 
+  TitleContainer,
+  ContainerShowMore,
+  SpanShowMore, 
   Display, 
   Header, 
   Title, 
   Body, 
   AddButton,
+  ButtonShowMore,
+  ButtonShowLess,
+  TrashButton,
   ListContainer,
   ItemList,
   ItemInput,
@@ -36,6 +41,7 @@ function App() {
 
   const [showAlert, setShowAlert] = useState(false)
   const [showElement, setShowElement] = useState(false);
+  const [showMore, setShowMore] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(true)
   const [task, setTask] = useState("")
   const [obsTask, setObsTask] = useState("")
@@ -49,6 +55,12 @@ function App() {
     setShowElement(false)
     setShowAlert(false)
   };
+
+  const ShowMore = () => setShowMore(true)
+  const ShowLess = () => {
+    setShowMore(false)
+    setConfirmDelete(true)
+  }
 
   useEffect(() => {localStorage.setItem("List", JSON.stringify(list))}, [list])
 
@@ -93,11 +105,27 @@ function App() {
           <Title>Tarefas</Title>
         </Header>
         <Body>
-          <AddButton onClick={ShowElement}> <FaPlus size={30}/> </AddButton>
-          {confirmDelete ? <FaTrashAlt size={50} onClick={() => setConfirmDelete(false)}/> : <FaExclamation size={50} onClick={() => {
-            localStorage.clear()
-            location.reload()
-          }}/>}
+          <SpanShowMore>
+            {showMore ? 
+            <ContainerShowMore>
+              <ButtonShowLess onClick={ShowLess}> . . . </ButtonShowLess>
+              <AddButton onClick={ShowElement}> <FaPlus size={30}/> </AddButton>
+              {confirmDelete ?
+              <TrashButton>
+                <FaTrashAlt size={50} onClick={() => setConfirmDelete(false)}/>
+              </TrashButton> 
+              :
+              <TrashButton>
+                <FaExclamation size={50} onClick={() => {
+                localStorage.clear()
+                location.reload()
+                }}/>
+              </TrashButton>
+              }
+            </ContainerShowMore>
+            : <ButtonShowMore onClick={ShowMore}> . . . </ButtonShowMore>
+            }
+          </SpanShowMore>
           {showElement ? 
                     <Modal>
                       <Form onSubmit={handleItemToList}>
