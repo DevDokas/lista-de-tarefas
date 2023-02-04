@@ -33,6 +33,14 @@ import {
   InputDetails,
   Paragraph,
 } from './styles/stylesModal'
+import {
+  InfoModal,
+  InfoContainer,
+  InfoCloseButton,
+  TitleSpan,
+  DetailsSpan, 
+} from './styles/stylesInfo'
+
 
 function App() {
   const LocalStore = () => {
@@ -44,6 +52,7 @@ function App() {
   const [showAlert, setShowAlert] = useState(false)
   const [showElement, setShowElement] = useState(false);
   const [showMore, setShowMore] = useState(false)
+  const [showInfo, setInfo] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(true)
   const [task, setTask] = useState("")
   const [obsTask, setObsTask] = useState("")
@@ -66,6 +75,19 @@ function App() {
     setConfirmDelete(true)
   }
 
+  function ShowInfo(task) {
+    const thisTask = task.id - 1
+
+    list[thisTask].showMore = !task.showMore
+    setList(list)
+    localStorage.setItem("List", JSON.stringify(list))
+    location.reload()  
+
+    //TODO: excluir estes console.logs 
+    console.log(list[thisTask].showMore)
+    console.log(task)
+  }
+
   useEffect(() => {localStorage.setItem("List", JSON.stringify(list))}, [list])
 
   function handleChangeInputTask(e) {
@@ -85,7 +107,7 @@ function App() {
       return setShowAlert(true);
     }
     if (task !== "") {
-      setList([...list, {id: list.length + 1, title: task.trim(), details: obsTask.trim(), done: false}])
+      setList([...list, {id: list.length + 1, title: task.trim(), details: obsTask.trim(), done: false, showMore: false}])
     }
 
     setTask("")
@@ -152,12 +174,21 @@ function App() {
           <ListContainer>
             {list.map((task) => (
             <ItemList key={task.id}>
-              <ItemLi>
+              <ItemLi >
                 <CheckboxContainer>
                   {task.done ? <FaRegCheckSquare size={20}  onClick={() => CheckBox(task)}/> : <FaRegSquare size={20}  onClick={() => CheckBox(task)}/>}
                 </CheckboxContainer>
                 {" "}
-                <TitleContainer>{task.title}</TitleContainer>
+                <TitleContainer onClick={() => ShowInfo(task)}>{task.title}</TitleContainer>
+                {task.showMore ? 
+                <InfoModal>
+                  <InfoContainer>
+                    <InfoCloseButton > <FaRegTimesCircle size={35}onClick={() => ShowInfo(task)} color="red"/> </InfoCloseButton>
+                    <TitleSpan>{task.title}</TitleSpan>
+                    <DetailsSpan>{task.details}</DetailsSpan>
+                  </InfoContainer>
+                </InfoModal>
+                : null}
               </ItemLi>
             </ItemList>
             ))}

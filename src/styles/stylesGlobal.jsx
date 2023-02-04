@@ -138,6 +138,7 @@ export const CheckboxContainer = styled.span`
     flex-direction: column;
     justify-content: center;
     height: 50px;
+    cursor: pointer;
 `; 
 
 export const TitleContainer = styled.span`
@@ -147,4 +148,5 @@ export const TitleContainer = styled.span`
     height: 50px;
     width: 275px;
     font-size: 20px;
+    cursor: pointer;
 `;
